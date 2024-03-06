@@ -164,7 +164,7 @@ public class scoring {
         }
     }
     // writes
-    public static String chooseScore(boolean[] scoreStatus, Scanner sc){
+    public static int chooseScore(boolean[] scoreStatus, Scanner sc){
         String[] sectionNames = {"aces", "deuces", "threes", "fours", "fives", "sixes", "choice", "4 of a kind", "full house", "s straight", "l straight", "yacht"};
         do{
             System.out.print("\nWhich Score would you like to save?(Enter the category name)(Entry is Case Sensitive): ");
@@ -173,7 +173,7 @@ public class scoring {
             for (int i = 0; i < sectionNames.length; i++){
                 if (catChoice.equalsIgnoreCase(sectionNames[i])){
                     if (scoreStatus[i] == false){
-                        return catChoice;
+                        return i;
                     }
                     else{
                         errMessage = (sectionNames[i] + " already has a score. Try again..");
@@ -185,6 +185,11 @@ public class scoring {
             }
             System.out.println(errMessage);
         } while(true); 
+    }
+    public static void setScore(int scoreSheet[], boolean scoreSheetStatus[], int[] possScores, int choice){
+        var scoreNum = possScores[choice];
+        scoreSheet[choice] = scoreNum;
+        scoreSheetStatus[choice] = true;
     }
     // uses bubble sort to sort the array //
     public static void sortArray(int arr[]){
@@ -206,4 +211,5 @@ public class scoring {
             }
         }
     }
+
 }
