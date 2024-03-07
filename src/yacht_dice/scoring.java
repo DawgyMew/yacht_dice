@@ -167,7 +167,7 @@ public class scoring {
     public static int chooseScore(boolean[] scoreStatus, Scanner sc){
         String[] sectionNames = {"aces", "deuces", "threes", "fours", "fives", "sixes", "choice", "4 of a kind", "full house", "s straight", "l straight", "yacht"};
         do{
-            System.out.print("\nWhich Score would you like to save?(Enter the category name)(Entry is Case Sensitive): ");
+            System.out.print("\nWhich Score would you like to save?(Enter the category name): ");
             var errMessage = "";
             var catChoice = sc.nextLine();
             for (int i = 0; i < sectionNames.length; i++){
