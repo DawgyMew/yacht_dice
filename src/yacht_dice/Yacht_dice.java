@@ -8,11 +8,14 @@ import java.util.Scanner;
  * Work in Progress
  * :3
  */
+
+
+
 public class Yacht_dice extends scoring{
     public static void main(String[] args) {
         // define variables
         Scanner sc = new Scanner(System.in);
-        //scoring.test(sc);
+        scoring.test(sc);
         final var MAX_ROLL_COUNT = 3;
         int[] scoreSheet = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         // scoreSheetStatus keeps track of if the score has been written to.
@@ -48,12 +51,14 @@ public class Yacht_dice extends scoring{
         sc.close();
     }
     
+
     // Get a random number from 1 to 6 //
     public static int rollDice(){
         var rollNum = (int)(Math.random() * 6) + 1;
         //System.out.println(rollNum);
         return rollNum;
     }
+
     // Display the new numbers that were rolled //
     public static void showRolls(int[] rolls, int[] saved){
         var numInSave = checkSaved(saved);
