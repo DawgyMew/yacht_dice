@@ -8,14 +8,12 @@ import java.util.Scanner;
  * Work in Progress
  * :3
  */
-
-
-
 public class Yacht_dice extends scoring{
     public static void main(String[] args) {
         // define variables
         Scanner sc = new Scanner(System.in);
-        scoring.test(sc);
+        //scoring.test(sc);
+        scoring.testScores();
         final var MAX_ROLL_COUNT = 3;
         int[] scoreSheet = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         // scoreSheetStatus keeps track of if the score has been written to.
@@ -44,10 +42,12 @@ public class Yacht_dice extends scoring{
             var catChoice = scoring.chooseScore(scoreSheetStatus, sc);
             scoring.setScore(scoreSheet, scoreSheetStatus, scoreArray, catChoice);
         }   
-        System.out.println("Final Score:");
+        System.out.println("Final Score Sheet:");
         boolean[] emptyStatus = {false, false, false, false, false, false, false, false, false, false, false, false};
         // to show all the scores
         scoring.displayAllScores(scoreSheet, emptyStatus);
+        var total = scoring.calcTotal(scoreSheet);
+        System.out.println("\nTotal Score: " + total);
         sc.close();
     }
     

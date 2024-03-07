@@ -22,6 +22,11 @@ public class scoring {
         generateScores(testNums, testStatus);
         sc.nextLine();
     }
+    // temp test if the calculation works and applies the subtotal bonus //
+    public static void testScores(){
+        int[] testSheet = {10, 14, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0};
+        System.out.println(calcTotal(testSheet));
+    }
     // 
     public static int[] generateScores(int[] dieRolls, boolean[] scoreStatus){
         var numberPoints = checkNumbers(dieRolls);
@@ -102,7 +107,7 @@ public class scoring {
             else{
                 chain = 0;
             }
-            if (chain > maxChain){
+            if (chain > maxChain){ // !!! Does not work if more than 1 of number and is actually a small straight i need to fix this :3 !!! //
                 maxChain = chain;
             }
             //System.out.println("Chain: " + chain);
@@ -191,6 +196,18 @@ public class scoring {
         var scoreNum = possScores[choice];
         scoreSheet[choice] = scoreNum;
         scoreSheetStatus[choice] = true;
+    }
+    // Calculates the total of the scoresheet //
+    public static int calcTotal(int[] scoreSheet){
+        int total = 0;
+        for (int i = 0; i < scoreSheet.length; i++){
+            if (i == 6 && total >= 63){
+                System.out.println("Subtotal Bonus! + 35 Points!");
+                total += 35;
+            }
+            total += scoreSheet[i];
+        }
+        return total;
     }
     // uses bubble sort to sort the array //
     public static void sortArray(int arr[]){
