@@ -115,6 +115,7 @@ public class Yacht_dice extends scoring{
         while (responseNum != 0 && (checkSaved(saved) != 0)){
             System.out.print("\nWhich saved number would you like to remove?(Enter '0' to move on): ");
             responseNum = Integer.parseInt(sc.nextLine());
+            saved[responseNum] = 0;
         }
         return saved;
     }
