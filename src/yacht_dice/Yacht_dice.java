@@ -34,7 +34,7 @@ public class Yacht_dice extends scoring{
                 }
                 //showNewRolls(newRolls);
                 savedNums = saveRoll(newRolls, savedNums, sc);
-                savedNums = removeSavedNum(savedNums, sc);
+                removeSavedNum(savedNums, sc);
                 //System.out.println(Arrays.toString(savedNums));
                 finalRolls = newRolls;
             }
@@ -110,14 +110,18 @@ public class Yacht_dice extends scoring{
         return saved;
     }
     // Let the user remove any values from the saved array //
-    public static int[] removeSavedNum(int[] saved, Scanner sc){
+    public static void removeSavedNum(int saved[], Scanner sc){
         int responseNum = 10;
         while (responseNum != 0 && (checkSaved(saved) != 0)){
             System.out.print("\nWhich saved number would you like to remove?(Enter '0' to move on): ");
             responseNum = Integer.parseInt(sc.nextLine());
-            saved[responseNum] = 0;
+            for (int i = 0; i < saved.length; i++){
+                if (saved[i] == responseNum){
+                    saved[i] = 0;
+                    break;
+                }
+            }
         }
-        return saved;
     }
     // Returns number of actual numbers are in the saved list // 
     public static int checkSaved(int[] saved){

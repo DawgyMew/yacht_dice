@@ -17,8 +17,8 @@ public class scoring {
     // test for the scoring that uses a default number array //
     public static void test(Scanner sc){
         //int[] testNums = {1, 6, 3, 5, 3}; 
-        int[] testNums = {1, 2, 3, 4, 5}; 
-        boolean[] testStatus = {true, false, false, false, true, false, false, false, true, false, false, false};
+        int[] testNums = {1, 1, 1, 3, 3}; 
+        boolean[] testStatus = {true, false, false, false, true, false, false, false, false, false, false, false};
         generateScores(testNums, testStatus);
         sc.nextLine();
     }
@@ -76,8 +76,9 @@ public class scoring {
             }
             else if (count == 3){
                 int threeCount = i;
-                for (int j = 1; i <= 6; i++){
-                    if (count == 2 && count != threeCount){
+                for (int j = 1; j <= 6; j++){
+                    var smallCount = countNum(j, die);
+                    if (smallCount == 2 && smallCount != threeCount){
                         int twoCount = j;
                         return ((twoCount * 2) + (threeCount * 3));
                     }
