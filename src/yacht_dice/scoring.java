@@ -150,7 +150,7 @@ public class scoring {
         //System.out.println(Arrays.toString(combinedScores));
         return combinedScores;
     }
-    private static void displayAllScores(int[] numScores, boolean[] scoreUsed){
+    public static void displayAllScores(int[] numScores, boolean[] scoreUsed){
         String[] sectionNames = {"Aces", "Deuces", "Threes", "Fours", "Fives", "Sixes", "Choice", "4 of a Kind", "Full House", "S. Straight", "L. Straight", "Yacht"};
         for (int i = 0; i < sectionNames.length; i++){
             String scoreNum;

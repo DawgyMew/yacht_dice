@@ -41,6 +41,10 @@ public class Yacht_dice extends scoring{
             var catChoice = scoring.chooseScore(scoreSheetStatus, sc);
             scoring.setScore(scoreSheet, scoreSheetStatus, scoreArray, catChoice);
         }   
+        System.out.println("Final Score:");
+        boolean[] emptyStatus = {false, false, false, false, false, false, false, false, false, false, false, false};
+        // to show all the scores
+        scoring.displayAllScores(scoreSheet, emptyStatus);
         sc.close();
     }
     
