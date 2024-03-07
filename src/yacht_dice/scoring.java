@@ -206,10 +206,8 @@ public class scoring {
                     swapped = true;
                 }
             }
-            if (!swapped){ // stops if doesnt swap
-                break;
-            }
+            // stops if doesnt swap
+            if (!swapped) break; 
         }
     }
-
 }
