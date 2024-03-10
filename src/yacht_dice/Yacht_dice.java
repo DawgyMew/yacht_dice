@@ -12,8 +12,8 @@ public class Yacht_dice extends scoring{
     public static void main(String[] args) {
         // define variables
         Scanner sc = new Scanner(System.in);
-        //scoring.test(sc);
-        scoring.testScores();
+        scoring.test(sc);
+        //scoring.testScores();
         final var MAX_ROLL_COUNT = 3;
         int[] scoreSheet = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         // scoreSheetStatus keeps track of if the score has been written to.
@@ -24,28 +24,32 @@ public class Yacht_dice extends scoring{
             int[] savedNums = {0, 0, 0, 0, 0};// array for numbers the user saves
             int[] finalRolls = {0, 0, 0, 0, 0}; // array to save the final rolls because it wont let me define newRolls outside of the loop and im going to meow so loud.
             // For 1 turn
-            for (int i = 0; i < MAX_ROLL_COUNT; i++){
-                int[] newRolls = {0, 0, 0, 0, 0}; // Create empty array with 5 empty slots
-                for (int j = 0; j < (5 - checkSaved(savedNums)); j++){
-                    var newNum = rollDice();
-                    newRolls[j] = newNum;
+            for (int i = 1; i <= MAX_ROLL_COUNT; i++){
+                if (checkSaved(savedNums) < 5){ // makes it skip to the end if user saves all the numbers
+                    int[] newRolls = {0, 0, 0, 0, 0}; // Create empty array with 5 empty slots
+                    for (int j = 0; j < (5 - checkSaved(savedNums)); j++){
+                        var newNum = rollDice();
+                        newRolls[j] = newNum;
+                    }
+                    //showNewRolls(newRolls);
+                    if (i != MAX_ROLL_COUNT){
+                        savedNums = saveRoll(newRolls, savedNums, sc);
+                        removeSavedNum(savedNums, sc);
+                    }
+                    //System.out.println(Arrays.toString(savedNums));
+                    finalRolls = newRolls;
                 }
-                //showNewRolls(newRolls);
-                savedNums = saveRoll(newRolls, savedNums, sc);
-                removeSavedNum(savedNums, sc);
-                //System.out.println(Arrays.toString(savedNums));
-                finalRolls = newRolls;
             }
             var finalNumbers = combineArrays(savedNums, finalRolls);
             System.out.println(Arrays.toString(finalNumbers));
-            var scoreArray = scoring.generateScores(finalNumbers, scoreSheetStatus); // possible scores to get
+            var scoreArray = scoring.generateScores(finalNumbers, scoreSheetStatus, scoreSheet); // possible scores to get
             var catChoice = scoring.chooseScore(scoreSheetStatus, sc);
             scoring.setScore(scoreSheet, scoreSheetStatus, scoreArray, catChoice);
         }   
         System.out.println("Final Score Sheet:");
         boolean[] emptyStatus = {false, false, false, false, false, false, false, false, false, false, false, false};
         // to show all the scores
-        scoring.displayAllScores(scoreSheet, emptyStatus);
+        scoring.displayAllScores(scoreSheet, emptyStatus, scoreSheet);
         var total = scoring.calcTotal(scoreSheet);
         System.out.println("\nTotal Score: " + total);
         sc.close();

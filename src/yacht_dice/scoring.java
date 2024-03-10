@@ -17,9 +17,10 @@ public class scoring {
     // test for the scoring that uses a default number array //
     public static void test(Scanner sc){
         //int[] testNums = {1, 6, 3, 5, 3}; 
-        int[] testNums = {1, 1, 1, 3, 3}; 
+        int[] testNums = {1, 2, 2, 3, 4}; 
         boolean[] testStatus = {true, false, false, false, true, false, false, false, false, false, false, false};
-        generateScores(testNums, testStatus);
+        int[] testScoreSheet = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        generateScores(testNums, testStatus, testScoreSheet);
         sc.nextLine();
     }
     // temp test if the calculation works and applies the subtotal bonus //
@@ -28,7 +29,7 @@ public class scoring {
         System.out.println(calcTotal(testSheet));
     }
     // 
-    public static int[] generateScores(int[] dieRolls, boolean[] scoreStatus){
+    public static int[] generateScores(int[] dieRolls, boolean[] scoreStatus, int[] scoreSheet){
         var numberPoints = checkNumbers(dieRolls);
         var choicePoints = checkChoice(dieRolls);
         var fourKindPoints = checkFourKind(dieRolls);
@@ -36,7 +37,7 @@ public class scoring {
         var straightPoints = checkStraights(dieRolls);
         var yachtPoints = checkYacht(dieRolls);
         var allScores = combineAllScores(numberPoints, choicePoints, fourKindPoints, fullHousePoints, straightPoints, yachtPoints);
-        displayAllScores(allScores, scoreStatus);
+        displayAllScores(allScores, scoreStatus, scoreSheet);
         return allScores;
     }
     // Returns the totals of all the individual number combinations. //
@@ -81,9 +82,10 @@ public class scoring {
             }
             else if (count == 3){
                 int threeCount = i;
+                System.out.println(threeCount);
                 for (int j = 1; j <= 6; j++){
                     var smallCount = countNum(j, die);
-                    if (smallCount == 2 && smallCount != threeCount){
+                    if (smallCount == 2){
                         int twoCount = j;
                         return ((twoCount * 2) + (threeCount * 3));
                     }
@@ -104,10 +106,13 @@ public class scoring {
             if (difference == 1){
                 chain++;
             }
+            else if (difference == 0){
+                continue;
+            }
             else{
                 chain = 0;
             }
-            if (chain > maxChain){ // !!! Does not work if more than 1 of number and is actually a small straight i need to fix this :3 !!! //
+            if (chain > maxChain){ 
                 maxChain = chain;
             }
             //System.out.println("Chain: " + chain);
@@ -156,12 +161,12 @@ public class scoring {
         //System.out.println(Arrays.toString(combinedScores));
         return combinedScores;
     }
-    public static void displayAllScores(int[] numScores, boolean[] scoreUsed){
+    public static void displayAllScores(int[] numScores, boolean[] scoreUsed, int[] scoreSheet){
         String[] sectionNames = {"Aces", "Deuces", "Threes", "Fours", "Fives", "Sixes", "Choice", "4 of a Kind", "Full House", "S. Straight", "L. Straight", "Yacht"};
         for (int i = 0; i < sectionNames.length; i++){
             String scoreNum;
             if (scoreUsed[i] == true){
-                scoreNum = "--";
+                scoreNum = "[" + scoreSheet[i] + "]";
             }
             else{
                 scoreNum = "" + numScores[i];
