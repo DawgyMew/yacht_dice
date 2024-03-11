@@ -5,7 +5,6 @@ import java.util.Scanner;
  * Yacht Dice
  * @author Kat
  * Recreation of the hit game yacht dice in java
- * Work in Progress
  * :3
  */
 public class Yacht_dice extends scoring{
