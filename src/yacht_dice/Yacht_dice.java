@@ -14,21 +14,20 @@ public class Yacht_dice extends scoring{
         scoring.test(sc);
         //scoring.testScores();
         final var MAX_ROLL_COUNT = 3;
-        int[] scoreSheet = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] scoreSheet = new int[12];
         // scoreSheetStatus keeps track of if the score has been written to.
-        boolean[] scoreSheetStatus = {false, false, false, false, false, false, false, false, false, false, false, false};
+        boolean[] scoreSheetStatus = new boolean[12];
         //scoring.test(sc);
         //scoring.chooseScore(scoreSheetStatus, sc);
         for (int turn = 0; turn < scoreSheet.length; turn++){
-            int[] savedNums = {0, 0, 0, 0, 0};// array for numbers the user saves
-            int[] finalRolls = {0, 0, 0, 0, 0}; // array to save the final rolls because it wont let me define newRolls outside of the loop and im going to meow so loud.
+            int[] savedNums = new int[5];// array for numbers the user saves
+            int[] finalRolls = new int[5]; // array to save the final rolls because it wont let me define newRolls outside of the loop and im going to meow so loud.
             // For 1 turn
             for (int i = 1; i <= MAX_ROLL_COUNT; i++){
                 if (checkSaved(savedNums) < 5){ // makes it skip to the end if user saves all the numbers
-                    int[] newRolls = {0, 0, 0, 0, 0}; // Create empty array with 5 empty slots
+                    int[] newRolls = new int[5]; // Create empty array with 5 empty slots
                     for (int j = 0; j < (5 - checkSaved(savedNums)); j++){
-                        var newNum = rollDice();
-                        newRolls[j] = newNum;
+                        newRolls[j].rollDie();
                     }
                     //showNewRolls(newRolls);
                     if (i != MAX_ROLL_COUNT){
@@ -47,7 +46,6 @@ public class Yacht_dice extends scoring{
         }   
         System.out.println("Final Score Sheet:");
         boolean[] emptyStatus = {false, false, false, false, false, false, false, false, false, false, false, false};
-        // to show all the scores
         scoring.displayAllScores(scoreSheet, emptyStatus, scoreSheet);
         var total = scoring.calcTotal(scoreSheet);
         System.out.println("\nTotal Score: " + total);
@@ -58,12 +56,11 @@ public class Yacht_dice extends scoring{
     // Get a random number from 1 to 6 //
     public static int rollDice(){
         var rollNum = (int)(Math.random() * 6) + 1;
-        //System.out.println(rollNum);
         return rollNum;
     }
 
     // Display the new numbers that were rolled //
-    public static void showRolls(int[] rolls, int[] saved){
+    public static void showRolls(Die[] rolls, int[] saved){
         var numInSave = checkSaved(saved);
         System.out.print("\nNew: ");
         if (numInSave != 0){System.out.print("\t Saved:");}
@@ -89,7 +86,7 @@ public class Yacht_dice extends scoring{
         //}
     }
     // Let the user save any of the numbers they rolled. //
-    public static int[] saveRoll(int[] rolls, int[] saved, Scanner sc){
+    public static int[] saveRoll(Die[] rolls, int[] saved, Scanner sc){
         int responseNum = 10; // high number to start
         do{
             showRolls(rolls, saved);
@@ -98,7 +95,7 @@ public class Yacht_dice extends scoring{
             catch (NumberFormatException e) {System.out.println("Invalid Response."); continue;}
             //responseNum = Integer.parseInt(response);
             for (int i = 0; i < rolls.length; i++){ // check each number in the roll array 
-                if (responseNum == rolls[i]){
+                if (responseNum == rolls[i].getRoll()){
                     for (int j = 0; j < saved.length; j++){
                         if (saved[j] == 0){
                             saved[j] = responseNum; // replace the first available 0 in the saved array with the number.
